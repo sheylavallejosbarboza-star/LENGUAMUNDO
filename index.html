@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#8b69d6">
+<title>LinguaMundo - Aprende idiomas</title>
+
+<style>
+:root {
+  --lila: #9675df;
+  --lila-oscuro: #6543ad;
+  --lila-claro: #eee7ff;
+  --azul: #83b8ed;
+  --azul-claro: #e5f2ff;
+  --blanco: #ffffff;
+  --texto: #34265f;
+  --gris: #77728b;
+  --fondo: #f7f5ff;
+  --verde: #91cdb5;
+  --sombra: 0 6px 20px rgba(95,70,160,.10);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #e9e5f5;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--texto);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+.app {
+  max-width: 480px;
+  min-height: 100vh;
+  margin: auto;
+  background: var(--fondo);
+  position: relative;
+  padding-bottom: 90px;
+  overflow: hidden;
+}
+
+/* ENCABEZADO */
+
+.header {
+  padding: 22px 20px 15px;
+  background: linear-gradient(120deg,#d9caff,#dceeff);
+  border-radius: 0 0 28px 28px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: 900;
+  color: var(--lila-oscuro);
+}
+
+.logo span {
+  color: #3787d6;
+}
+
+.points {
+  background: white;
+  padding: 9px 15px;
+  border-radius: 25px;
+  font-weight: bold;
+  color: #7953bd;
+}
+
+.subtitle {
+  margin-top: 7px;
+  color: #655b88;
+  font-size: 13px;
+}
+
+/* CONTENIDO */
+
+main {
+  padding: 18px;
+}
+
+.page {
+  display: none;
+  animation: aparecer .3s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 13px;
+  color: var(--gris);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* PORTADA */
+
+.hero {
+  background: linear-gradient(130deg,#d9c9ff,#b9ddff);
+  border-radius: 24px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 23px;
+  overflow: hidden;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero h2 {
+  font-size: 23px;
+  color: #49327f;
+  margin-bottom: 8px;
+}
+
+.hero p {
+  color: #625487;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.hero-image {
+  width: 125px;
+  height: 125px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid white;
+}
+
+/* TARJETAS DE IDIOMAS */
+
+.language-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 13px;
+}
+
+.language-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px;
+  border-radius: 19px;
+  background: white;
+  box-shadow: var(--sombra);
+  border: 1px solid #eee8ff;
+  transition: .2s;
+}
+
+.language-card:active {
+  transform: scale(.97);
+}
+
+.flag {
+  width: 67px;
+  height: 67px;
+  border-radius: 17px;
+  display: grid;
+  place-items: center;
+  font-size: 40px;
+  background: var(--lila-claro);
+}
+
+.language-card:nth-child(2) .flag {
+  background: var(--azul-claro);
+}
+
+.language-card:nth-child(3) .flag {
+  background: #f5e6fa;
+}
+
+.language-info {
+  flex: 1;
+}
+
+.language-info h3 {
+  font-size: 17px;
+  margin-bottom: 5px;
+}
+
+.language-info p {
+  font-size: 12px;
+  color: var(--gris);
+}
+
+.btn {
+  padding: 10px 15px;
+  border-radius: 20px;
+  color: white;
+  background: linear-gradient(120deg,#a17ce7,#7450c1);
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.language-card:nth-child(2) .btn {
+  background: linear-gradient(120deg,#83b8ed,#477fca);
+}
+
+.language-card:nth-child(3) .btn {
+  background: linear-gradient(120deg,#bc91d9,#9261ba);
+}
+
+/* PROGRESO */
+
+.progress-card {
+  margin-top: 22px;
+  padding: 17px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--sombra);
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.progress-bar {
+  height: 11px;
+  background: #eee9f8;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#a98be8,#78b8ed);
+  border-radius: 20px;
+  transition: .4s;
+}
+
+.small-text {
+  font-size: 12px;
+  color: var(--gris);
+  margin-top: 9px;
+}
+
+/* ACCESOS */
+
+.shortcut-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.shortcut {
+  padding: 18px 10px;
+  text-align: center;
+  background: white;
+  border-radius: 19px;
+  box-shadow: var(--sombra);
+  color: var(--texto);
+}
+
+.shortcut .emoji {
+  font-size: 34px;
+  display: block;
+  margin-bottom: 9px;
+}
+
+.shortcut strong {
+  font-size: 13px;
+}
+
+/* SELECCIÓN Y LECCIONES */
+
+.section-card {
+  padding: 16px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: var(--sombra);
+  margin-bottom: 13px;
+}
+
+.section-card h3 {
+  margin-bottom: 8px;
+}
+
+.section-card p {
+  color: var(--gris);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.lesson-button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 12px;
+  border-radius: 13px;
+  background: var(--lila-claro);
+  color: var(--lila-oscuro);
+  text-align: left;
+  font-weight: bold;
+}
+
+.lesson-button.completed {
+  background: #e3f5ec;
+  color: #347c5e;
+}
+
+/* VOCABULARIO */
+
+.word-card {
+  background: linear-gradient(130deg,#e8ddff,#dceeff);
+  border-radius: 22px;
+  padding: 25px 15px;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.word-card .word {
+  font-size: 31px;
+  font-weight: 900;
+  color: #6543ad;
+  margin: 10px 0;
+}
+
+.word-card p {
+  margin: 8px 0;
+}
+
+.action-row {
+  display: flex;
+  gap: 9px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.primary-button {
+  background: linear-gradient(120deg,#a17ce7,#7450c1);
+  color: white;
+  padding: 13px 19px;
+  border-radius: 13px;
+  font-weight: bold;
+}
+
+.secondary-button {
+  background: var(--azul-claro);
+  color: #426f9d;
+  padding: 13px 19px;
+  border-radius: 13px;
+  font-weight: bold;
+}
+
+/* JUEGOS Y EVALUACIONES */
+
+.question {
+  padding: 20px;
+  background: linear-gradient(120deg,#eee6ff,#e4f2ff);
+  border-radius: 20px;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.question h3 {
+  margin: 12px 0;
+  font-size: 20px;
+}
+
+.option {
+  width: 100%;
+  padding: 14px;
+  border-radius: 13px;
+  background: white;
+  margin: 7px 0;
+  text-align: left;
+  color: var(--texto);
+  border: 1px solid #eee8fa;
+  font-weight: bold;
+}
+
+.option:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.option.correct {
+  background: #d9f4e5;
+  border-color: #7bc99e;
+}
+
+.option.wrong {
+  background: #ffe3e8;
+  border-color: #e99aaa;
+}
+
+.feedback {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin: 12px 0;
+  min-height: 20px;
+}
+
+/* IMÁGENES */
+
+.image-banner {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 18px;
+  margin: 12px 0;
+}
+
+.profile {
+  text-align: center;
+  padding: 25px;
+  background: linear-gradient(130deg,#e9dcff,#dceeff);
+  border-radius: 22px;
+}
+
+.profile-icon {
+  font-size: 65px;
+  margin-bottom: 10px;
+}
+
+/* NAVEGACIÓN INFERIOR */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  background: rgba(255,255,255,.97);
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 5px;
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -4px 18px rgba(80,60,130,.12);
+  z-index: 100;
+}
+
+.nav-button {
+  background: transparent;
+  color: #8b7bb4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  padding: 4px 10px;
+}
+
+.nav-button .nav-icon {
+  font-size: 23px;
+}
+
+.nav-button.active {
+  color: #714dbb;
+  font-weight: bold;
+}
+
+/* MENSAJES */
+
+.notice {
+  background: #e4f4ec;
+  color: #357b5c;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 13px;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+footer {
+  text-align: center;
+  color: #9991ad;
+  font-size: 11px;
+  padding: 20px 10px;
+}
+
+@media (min-width: 481px) {
+  .app {
+    box-shadow: 0 0 35px rgba(60,40,100,.12);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+  <div class="header-top">
+    <div class="logo">🎓 Lingua<span>Mundo</span></div>
+    <div class="points">⭐ <span id="points">0</span></div>
+  </div>
+  <p class="subtitle">🌎 Aprende idiomas a tu propio ritmo 💜</p>
+</header>
+
+<main>
+
+<!-- INICIO -->
+<section class="page active" id="home">
+
+  <div class="hero">
+    <div class="hero-text">
+      <h2>¡Hola! 💜</h2>
+      <p>¿Qué idioma quieres aprender hoy? Descubre nuevas palabras y culturas.</p>
+    </div>
+    <img class="hero-image"
+      src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?w=300"
+      alt="Mapa del mundo">
+  </div>
+
+  <h2>🌍 Elige tu idioma</h2>
+  <p class="description">Selecciona uno para comenzar a aprender.</p>
+
+  <div class="language-grid">
+
+    <div class="language-card">
+      <div class="flag">🇪🇸</div>
+      <div class="language-info">
+        <h3>Español</h3>
+        <p>Aprende y mejora</p>
+      </div>
+      <button class="btn" onclick="selectLanguage('es')">Entrar →</button>
+    </div>
+
+    <div class="language-card">
+      <div class="flag">🇬🇧</div>
+      <div class="language-info">
+        <h3>Inglés</h3>
+        <p>Speak English</p>
+      </div>
+      <button class="btn" onclick="selectLanguage('en')">Entrar →</button>
+    </div>
+
+    <div class="language-card">
+      <div class="flag">🇧🇷</div>
+      <div class="language-info">
+        <h3>Portugués</h3>
+        <p>Aprenda português</p>
+      </div>
+      <button class="btn" onclick="selectLanguage('pt')">Entrar →</button>
+    </div>
+
+  </div>
+
+  <div class="progress-card">
+    <div class="progress-header">
+      <span>🏆 Tu progreso</span>
+      <span id="progressText">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <p class="small-text" id="lessonCount">Lecciones completadas: 0</p>
+  </div>
+
+  <h2 style="margin-top:23px">✨ Más opciones</h2>
+
+  <div class="shortcut-grid">
+    <button class="shortcut" onclick="showPage('lessons')">
+      <span class="emoji">📚</span>
+      <strong>Lecciones</strong>
+    </button>
+
+    <button class="shortcut" onclick="showPage('games')">
+      <span class="emoji">🎮</span>
+      <strong>Juegos</strong>
+    </button>
+
+    <button class="shortcut" onclick="showPage('quiz')">
+      <span class="emoji">📝</span>
+      <strong>Evaluaciones</strong>
+    </button>
+
+    <button class="shortcut" onclick="showPage('progress')">
+      <span class="emoji">📊</span>
+      <strong>Mi progreso</strong>
+    </button>
+  </div>
+
+  <footer>Cada palabra nueva te acerca a un mundo mejor 💜</footer>
+</section>
+
+
+<!-- IDIOMAS -->
+<section class="page" id="lessons">
+  <h2>📚 Mis lecciones</h2>
+  <p class="description">Aprende poco a poco y avanza a tu ritmo.</p>
+
+  <div class="section-card">
+    <h3>🌟 Selecciona tu idioma</h3>
+    <button class="lesson-button" onclick="selectLanguage('es')">🇪🇸 Español</button>
+    <button class="lesson-button" onclick="selectLanguage('en')">🇬🇧 Inglés</button>
+    <button class="lesson-button" onclick="selectLanguage('pt')">🇧🇷 Portugués</button>
+  </div>
+
+  <div id="lessonContent">
+    <div class="section-card">
+      <h3>💡 ¿Cómo comenzar?</h3>
+      <p>Primero selecciona un idioma. Después podrás estudiar vocabulario, saludos y expresiones cotidianas.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- VOCABULARIO -->
+<section class="page" id="vocabulary">
+  <h2>📖 Vocabulario</h2>
+  <p class="description">Aprende palabras y escucha cómo se pronuncian.</p>
+
+  <div class="section-card">
+    <h3 id="vocabLanguage">🇬🇧 Inglés básico</h3>
+    <p>Escucha, lee y practica cada palabra.</p>
+  </div>
+
+  <div class="word-card">
+    <div style="font-size:40px" id="wordEmoji">👋</div>
+    <div class="word" id="word">Hello</div>
+    <p id="translation">Hola</p>
+    <p style="color:#81749e;font-size:13px" id="pronunciation">Pronunciación: jelóu</p>
+
+    <div class="action-row">
+      <button class="primary-button" onclick="speakWord()">🔊 Escuchar</button>
+      <button class="secondary-button" onclick="nextWord()">Siguiente →</button>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h3>💡 Consejo</h3>
+    <p>Repite cada palabra en voz alta para mejorar tu pronunciación.</p>
+  </div>
+</section>
+
+
+<!-- JUEGOS -->
+<section class="page" id="games">
+  <h2>🎮 Zona de juegos</h2>
+  <p class="description">¡Aprender también puede ser divertido!</p>
+
+  <img class="image-banner"
+    src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=700"
+    alt="Material de aprendizaje">
+
+  <div class="section-card">
+    <h3>🧠 Juego de traducción</h3>
+    <p>Selecciona la traducción correcta de la palabra que aparece.</p>
+    <button class="primary-button" style="margin-top:14px"
+      onclick="startGame()">Comenzar juego</button>
+  </div>
+
+  <div id="gameArea"></div>
+</section>
+
+
+<!-- EVALUACIÓN -->
+<section class="page" id="quiz">
+  <h2>📝 Evaluación</h2>
+  <p class="description">Comprueba cuánto has aprendido.</p>
+
+  <div class="section-card">
+    <h3>🎯 Prueba de conocimientos</h3>
+    <p>Responde las preguntas y descubre tu resultado.</p>
+    <button class="primary-button" style="margin-top:13px"
+      onclick="startQuiz()">Iniciar evaluación</button>
+  </div>
+
+  <div id="quizArea"></div>
+</section>
+
+
+<!-- PROGRESO -->
+<section class="page" id="progress">
+  <h2>📊 Mi progreso</h2>
+  <p class="description">Observa todos tus avances en LinguaMundo.</p>
+
+  <div class="progress-card">
+    <div class="progress-header">
+      <span>⭐ Puntos acumulados</span>
+      <span id="totalPoints">0</span>
+    </div>
+    <div class="progress-header">
+      <span>📚 Lecciones terminadas</span>
+      <span id="totalLessons">0</span>
+    </div>
+    <div class="progress-header">
+      <span>🎮 Juegos completados</span>
+      <span id="totalGames">0</span>
+    </div>
+    <div class="progress-header">
+      <span>📝 Evaluaciones realizadas</span>
+      <span id="totalQuizzes">0</span>
+    </div>
+  </div>
+
+  <div class="section-card" style="margin-top:15px">
+    <h3>🌟 ¡Sigue aprendiendo!</h3>
+    <p>Cada ejercicio que realizas te ayuda a mejorar tus conocimientos.</p>
+  </div>
+</section>
+
+
+<!-- PERFIL -->
+<section class="page" id="profile">
+  <h2>👤 Mi perfil</h2>
+
+  <div class="profile">
+    <div class="profile-icon">👩🏻‍🎓</div>
+    <h2>Estudiante LinguaMundo</h2>
+    <p>¡Bienvenido a tu espacio de aprendizaje!</p>
+  </div>
+
+  <div class="section-card" style="margin-top:15px">
+    <h3>💜 Sobre la aplicación</h3>
+    <p>LinguaMundo es una aplicación educativa creada para aprender español, inglés y portugués de manera sencilla, entretenida e interactiva.</p>
+  </div>
+
+  <div class="section-card">
+    <h3>🎯 Nuestro objetivo</h3>
+    <p>Desarrollar habilidades de comunicación y ampliar nuestros conocimientos de diferentes idiomas.</p>
+  </div>
+
+  <div class="section-card">
+    <h3>⚙️ Mis datos</h3>
+    <p>El progreso se guarda en el almacenamiento local de este navegador.</p>
+    <button class="secondary-button" style="margin-top:12px"
+      onclick="resetProgress()">Reiniciar progreso</button>
+  </div>
+</section>
+
+</main>
+
+
+<!-- BARRA INFERIOR -->
+<nav class="bottom-nav">
+
+  <button class="nav-button active" data-page="home" onclick="showPage('home')">
+    <span class="nav-icon">🏠</span>
+    Inicio
+  </button>
+
+  <button class="nav-button" data-page="lessons" onclick="showPage('lessons')">
+    <span class="nav-icon">📖</span>
+    Lecciones
+  </button>
+
+  <button class="nav-button" data-page="progress" onclick="showPage('progress')">
+    <span class="nav-icon">🏆</span>
+    Progreso
+  </button>
+
+  <button class="nav-button" data-page="profile" onclick="showPage('profile')">
+    <span class="nav-icon">👤</span>
+    Perfil
+  </button>
+
+</nav>
+
+</div>
+
+
+<script>
+
+/* DATOS Y PROGRESO */
+
+let savedData = {};
+
+try {
+  savedData = JSON.parse(localStorage.getItem("linguamundoData")) || {};
+} catch (error) {
+  savedData = {};
+}
+
+let points = savedData.points || 0;
+let completed = savedData.completed || [];
+let games = savedData.games || 0;
+let quizzes = savedData.quizzes || 0;
+
+let currentLanguage = "en";
+let wordIndex = 0;
+let gameIndex = 0;
+let quizIndex = 0;
+let gameAnswered = false;
+let quizAnswered = false;
+let quizCorrect = 0;
+
+const languages = {
+  es: {
+    name: "Español",
+    flag: "🇪🇸",
+    voice: "es-ES",
+    words: [
+      ["Hola","Hola","ola","👋"],
+      ["Gracias","Gracias","grá-sias","💜"],
+      ["Familia","Familia","fa-mí-lia","👨‍👩‍👧"],
+      ["Amigo","Amigo","a-mí-go","🤝"],
+      ["Agua","Agua","á-gua","💧"],
+      ["Escuela","Escuela","es-kué-la","🏫"],
+      ["Libro","Libro","lí-bro","📚"],
+      ["Buenos días","Buenos días","bué-nos dí-as","☀️"]
+    ]
+  },
+
+  en: {
+    name: "Inglés",
+    flag: "🇬🇧",
+    voice: "en-US",
+    words: [
+      ["Hello","Hola","jelóu","👋"],
+      ["Thank you","Gracias","zank iu","💜"],
+      ["Family","Familia","fámili","👨‍👩‍👧"],
+      ["Friend","Amigo","frend","🤝"],
+      ["Water","Agua","uóter","💧"],
+      ["School","Escuela","skul","🏫"],
+      ["Book","Libro","buk","📚"],
+      ["Good morning","Buenos días","gud mórning","☀️"]
+    ]
+  },
+
+  pt: {
+    name: "Portugués",
+    flag: "🇧🇷",
+    voice: "pt-BR",
+    words: [
+      ["Olá","Hola","olá","👋"],
+      ["Obrigado","Gracias","obrigádu","💜"],
+      ["Família","Familia","família","👨‍👩‍👧"],
+      ["Amigo","Amigo","amígu","🤝"],
+      ["Água","Agua","água","💧"],
+      ["Escola","Escuela","escóla","🏫"],
+      ["Livro","Libro","lívrú","📚"],
+      ["Bom dia","Buenos días","bom día","☀️"]
+    ]
+  }
+};
+
+
+/* PREGUNTAS */
+
+const questions = [
+  {
+    word: "Hello",
+    options: ["Adiós","Hola","Gracias"],
+    answer: "Hola"
+  },
+  {
+    word: "Water",
+    options: ["Agua","Libro","Casa"],
+    answer: "Agua"
+  },
+  {
+    word: "Family",
+    options: ["Escuela","Amigo","Familia"],
+    answer: "Familia"
+  },
+  {
+    word: "Book",
+    options: ["Libro","Agua","Perro"],
+    answer: "Libro"
+  },
+  {
+    word: "Thank you",
+    options: ["Buenos días","Gracias","Hasta luego"],
+    answer: "Gracias"
+  }
+];
+
+
+/* GUARDAR */
+
+function saveData() {
+  localStorage.setItem("linguamundoData", JSON.stringify({
+    points,
+    completed,
+    games,
+    quizzes
+  }));
+
+  updateProgress();
+}
+
+
+/* NAVEGACIÓN */
+
+function showPage(page) {
+  document.querySelectorAll(".page").forEach(section => {
+    section.classList.remove("active");
+  });
+
+  const target = document.getElementById(page);
+  if (target) target.classList.add("active");
+
+  document.querySelectorAll(".nav-button").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.page === page
+    );
+  });
+
+  updateProgress();
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+
+/* ACTUALIZAR PROGRESO */
+
+function updateProgress() {
+  const percent = Math.min(100, Math.round(completed.length / 3 * 100));
+
+  document.getElementById("points").textContent = points;
+  document.getElementById("progressText").textContent = percent + "%";
+  document.getElementById("progressFill").style.width = percent + "%";
+  document.getElementById("lessonCount").textContent =
+    "Lecciones completadas: " + completed.length;
+
+  document.getElementById("totalPoints").textContent = points;
+  document.getElementById("totalLessons").textContent = completed.length;
+  document.getElementById("totalGames").textContent = games;
+  document.getElementById("totalQuizzes").textContent = quizzes;
+}
+
+
+/* ELEGIR IDIOMA */
+
+function selectLanguage(language) {
+  currentLanguage = language;
+  wordIndex = 0;
+
+  showPage("lessons");
+  renderLessons();
+  renderWord();
+}
+
+
+/* LECCIONES */
+
+const lessonList = [
+  {
+    id: "saludos",
+    title: "👋 Lección 1: Saludos y presentaciones",
+    description: "Aprende a saludar y presentarte."
+  },
+  {
+    id: "vocabulario",
+    title: "📚 Lección 2: Palabras cotidianas",
+    description: "Conoce palabras que utilizas todos los días."
+  },
+  {
+    id: "familia",
+    title: "👨‍👩‍👧 Lección 3: La familia",
+    description: "Aprende a nombrar a los integrantes de tu familia."
+  }
+];
+
+function renderLessons() {
+  const container = document.getElementById("lessonContent");
+
+  let html = `
+    <div class="section-card">
+      <h3>${languages[currentLanguage].flag} ${languages[currentLanguage].name}</h3>
+      <p>Tu curso está listo. Completa las lecciones para ganar puntos.</p>
+    </div>
+  `;
+
+  lessonList.forEach((lesson, index) => {
+    const done = completed.includes(
+      currentLanguage + "-" + lesson.id
+    );
+
+    html += `
+      <div class="section-card">
+        <h3>${lesson.title}</h3>
+        <p>${lesson.description}</p>
+        <button class="lesson-button ${done ? "completed" : ""}"
+          onclick="openLesson('${lesson.id}')">
+          ${done ? "✓ Completada" : "Comenzar lección →"}
+        </button>
+      </div>
+    `;
+  });
+
+  html += `
+    <button class="primary-button" onclick="showPage('vocabulary')">
+      📖 Practicar vocabulario
+    </button>
+  `;
+
+  container.innerHTML = html;
+}
+
+function openLesson(id) {
+  const lesson = lessonList.find(item => item.id === id);
+  if (!lesson) return;
+
+  const key = currentLanguage + "-" + id;
+  const isDone = completed.includes(key);
+
+  const content = {
+    saludos: [
+      "Aprende a saludar de manera amable.",
+      "Practica expresiones como Hola, Buenos días y ¿Cómo estás?"
+    ],
+    vocabulario: [
+      "Descubre nuevas palabras.",
+      "Practica palabras sobre la escuela, la casa y la vida cotidiana."
+    ],
+    familia: [
+      "Aprende los nombres de los familiares.",
+      "Practica las palabras madre, padre, hermano y hermana."
+    ]
+  };
+
+  const details = content[id];
+
+  document.getElementById("lessonContent").innerHTML = `
+    <div class="section-card">
+      <h3>${lesson.title}</h3>
+      <p>${details[0]}</p>
+      <p style="margin-top:12px">${details[1]}</p>
+      <div class="notice">💡 Consejo: lee el contenido en voz alta y repite las palabras.</div>
+      <button class="primary-button" style="margin-top:15px"
+        onclick="completeLesson('${key}')">
+        ${isDone ? "Lección ya completada ✓" : "Marcar como completada"}
+      </button>
+      <button class="secondary-button" style="margin-top:10px"
+        onclick="renderLessons()">Volver a las lecciones</button>
+    </div>
+  `;
+}
+
+function completeLesson(key) {
+  if (!completed.includes(key)) {
+    completed.push(key);
+    points += 10;
+    saveData();
+  }
+
+  renderLessons();
+}
+
+
+/* VOCABULARIO */
+
+function renderWord() {
+  const data = languages[currentLanguage];
+  const word = data.words[wordIndex];
+
+  document.getElementById("vocabLanguage").textContent =
+    data.flag + " " + data.name;
+
+  document.getElementById("wordEmoji").textContent = word[3];
+  document.getElementById("word").textContent = word[0];
+  document.getElementById("translation").textContent =
+    "Traducción: " + word[1];
+  document.getElementById("pronunciation").textContent =
+    "Pronunciación aproximada: " + word[2];
+}
+
+function nextWord() {
+  const words = languages[currentLanguage].words;
+  wordIndex = (wordIndex + 1) % words.length;
+  renderWord();
+}
+
+function speakWord() {
+  if (!("speechSynthesis" in window)) {
+    alert("Tu navegador no admite la función de pronunciación.");
+    return;
+  }
+
+  const utterance = new SpeechSynthesisUtterance(
+    languages[currentLanguage].words[wordIndex][0]
+  );
+
+  utterance.lang = languages[currentLanguage].voice;
+  utterance.rate = 0.85;
+
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utterance);
+}
+
+
+/* JUEGO */
+
+function startGame() {
+  gameIndex = 0;
+  gameAnswered = false;
+  renderGame();
+}
+
+function renderGame() {
+  const question = questions[gameIndex];
+
+  document.getElementById("gameArea").innerHTML = `
+    <div class="section-card">
+      <p>Pregunta ${gameIndex + 1} de ${questions.length}</p>
+      <div class="question">
+        <span style="font-size:35px">🌟</span>
+        <h3>${question.word}</h3>
+        <p>¿Cuál es su significado?</p>
+      </div>
+      <div id="gameOptions"></div>
+      <div class="feedback" id="gameFeedback"></div>
+      <button class="primary-button" id="gameNext"
+        style="display:none" onclick="nextGame()">Siguiente →</button>
+    </div>
+  `;
+
+  question.options.forEach(option => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent = option;
+
+    button.onclick = () => {
+      if (gameAnswered) return;
+      gameAnswered = true;
+
+      const correct = option === question.answer;
+      button.classList.add(correct ? "correct" : "wrong");
+
+      document.querySelectorAll("#gameOptions button").forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === question.answer) {
+          btn.classList.add("correct");
+        }
+      });
+
+      document.getElementById("gameFeedback").textContent =
+        correct ? "¡Muy bien! 🎉 Respuesta correcta." :
+        "¡Sigue practicando! La respuesta es: " + question.answer;
+
+      if (correct) {
+        points += 5;
+        saveData();
+      }
+
+      document.getElementById("gameNext").style.display = "inline-block";
+    };
+
+    document.getElementById("gameOptions").appendChild(button);
+  });
+}
+
+function nextGame() {
+  gameIndex++;
+  gameAnswered = false;
+
+  if (gameIndex >= questions.length) {
+    games++;
+    points += 10;
+    saveData();
+
+    document.getElementById("gameArea").innerHTML = `
+      <div class="section-card">
+        <h3>🏆 ¡Juego terminado!</h3>
+        <p>Has completado todas las preguntas. ¡Sigue practicando!</p>
+        <button class="primary-button" style="margin-top:14px"
+          onclick="startGame()">Volver a jugar</button>
+      </div>
+    `;
+    return;
+  }
+
+  renderGame();
+}
+
+
+/* EVALUACIÓN */
+
+function startQuiz() {
+  quizIndex = 0;
+  quizCorrect = 0;
+  quizAnswered = false;
+  renderQuiz();
+}
+
+function renderQuiz() {
+  const question = questions[quizIndex];
+
+  document.getElementById("quizArea").innerHTML = `
+    <div class="section-card">
+      <p>Pregunta ${quizIndex + 1} de ${questions.length}</p>
+      <div class="question">
+        <span style="font-size:35px">📝</span>
+        <h3>${question.word}</h3>
+        <p>Selecciona la traducción correcta.</p>
+      </div>
+      <div id="quizOptions"></div>
+      <div class="feedback" id="quizFeedback"></div>
+      <button class="primary-button" id="quizNext"
+        style="display:none" onclick="nextQuiz()">Continuar →</button>
+    </div>
+  `;
+
+  question.options.forEach(option => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent = option;
+
+    button.onclick = () => {
+      if (quizAnswered) return;
+      quizAnswered = true;
+
+      const correct = option === question.answer;
+
+      if (correct) quizCorrect++;
+
+      document.querySelectorAll("#quizOptions button").forEach(btn => {
+        btn.disabled = true;
+
+        if (btn.textContent === question.answer) {
+          btn.classList.add("correct");
+        }
+      });
+
+      if (!correct) button.classList.add("wrong");
+
+      document.getElementById("quizFeedback").textContent =
+        correct ? "¡Correcto! 🌟" : "Respuesta correcta: " + question.answer;
+
+      document.getElementById("quizNext").style.display = "inline-block";
+    };
+
+    document.getElementById("quizOptions").appendChild(button);
+  });
+}
+
+function nextQuiz() {
+  quizIndex++;
+  quizAnswered = false;
+
+  if (quizIndex >= questions.length) {
+    quizzes++;
+
+    const score = Math.round(quizCorrect / questions.length * 20);
+    points += quizCorrect * 2;
+
+    saveData();
+
+    document.getElementById("quizArea").innerHTML = `
+      <div class="section-card" style="text-align:center">
+        <div style="font-size:55px">🏆</div>
+        <h2>¡Evaluación terminada!</h2>
+        <h2 style="color:#7953bd">${score}/20 puntos</h2>
+        <p>Respuestas correctas: ${quizCorrect} de ${questions.length}</p>
+        <p style="margin-top:12px">
+          ${score >= 16 ? "¡Excelente trabajo! 🎉" :
+          score >= 11 ? "¡Buen esfuerzo! Sigue practicando." :
+          "Continúa estudiando. ¡Puedes mejorar!"}
+        </p>
+        <button class="primary-button" style="margin-top:15px"
+          onclick="startQuiz()">Volver a evaluar</button>
+      </div>
+    `;
+    return;
+  }
+
+  renderQuiz();
+}
+
+
+/* REINICIAR */
+
+function resetProgress() {
+  const confirmReset = confirm(
+    "¿Estás segura de que deseas reiniciar todo tu progreso?"
+  );
+
+  if (!confirmReset) return;
+
+  points = 0;
+  completed = [];
+  games = 0;
+  quizzes = 0;
+
+  saveData();
+  renderLessons();
+
+  alert("Tu progreso ha sido reiniciado.");
+}
+
+
+/* INICIO */
+
+updateProgress();
+renderWord();
+
+</script>
+
+</body>
+</html>
